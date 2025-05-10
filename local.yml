@@ -1,0 +1,14 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: jdnd-backend
+    volumes:
+      - ./:/code
+    env_file:
+      - .env
+    command: ["uvicorn", "config.asgi:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "8000:8000"
