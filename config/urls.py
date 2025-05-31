@@ -8,4 +8,6 @@ from config.api import api
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
-] + staticfiles_urlpatterns()
+] + staticfiles_urlpatterns() + static(
+    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
+)

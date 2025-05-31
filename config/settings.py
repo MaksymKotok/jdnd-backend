@@ -14,7 +14,7 @@ SECRET_KEY = 'django-insecure-r54adzv@@al*fi_+h-7ko!az&8vv5#=p6=chhw1w(cl5(qcs92
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["0.0.0.0", "localhost", "127.0.0.1", "192.168.31.139"]
 
 CORS_ORIGIN_ALLOW_ALL = True
 
@@ -43,6 +43,8 @@ CORE_APPS = [
 DJANGO_APPS = [
     'apps.characters',
     'apps.users',
+    'ninja_jwt',
+    'ninja_extra',
 ]
 
 THIRD_PARTY_APPS = [
@@ -141,3 +143,4 @@ AUTH_USER_MODEL = 'users.User'
 
 if DEBUG:
     MEDIA_ROOT = 'media/'
+    MEDIA_URL = '/media/'

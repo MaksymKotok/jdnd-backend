@@ -68,7 +68,7 @@ class CharacterRole(models.Model):
 class Character(models.Model):
     
     def avatar_path(instance, filename):
-        return f"users/{instance.user}/characters/{filename}"
+        return f"users/{instance.user.id}/characters/{instance.id}/{filename}"
     
     user = models.ForeignKey(
         "users.User",

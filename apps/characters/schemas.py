@@ -6,6 +6,7 @@ from apps.characters.models import Character
 class CharacterListSchema(Schema):
     id: int
     full_name: str
+    avatar: str | None = None
     user: str | None = Field(None, alias="user.email")
     level: int
     age: int | None = None
