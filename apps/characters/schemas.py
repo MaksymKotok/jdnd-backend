@@ -10,7 +10,17 @@ class CharacterListSchema(Schema):
     level: int
     age: int | None = None
     alignment: str = Field(..., alias="get_alignment_display")
+
+
+class CharacterAbilitySchema(Schema):
+    name: str = Field(..., alias="get_name_display")
+    value: int
     
+    
+class CharacterSkillSchema(Schema):
+    name: str = Field(..., alias="get_name_display")
+    value: int
+
     
 class CharacterDetailSchema(Schema):
     id: int
@@ -20,33 +30,9 @@ class CharacterDetailSchema(Schema):
     age: int | None = None
     alignment: str = Field(None, alias="get_alignment_display")
     role: str | None = Field(None, alias="role.name")
-    
-    abilities: list[dict[str, str | int]]
-    skills: dict[str, list[dict[str, str | int]]]
-    
-    @staticmethod
-    def resolve_abilities(obj) -> dict[str, int]:
-        return [
-            { 
-                "name": key,
-                "value": getattr(obj, key)
-            }  
-            for key in Character.get_abilities()
-        ]
-        
-    @staticmethod
-    def resolve_skills(obj) -> dict[str, int]:
-        return {
-            type: [
-                { 
-                    "name": key,
-                    "value": getattr(obj, key)
-                } 
-                for key in Character.get_skills_by_type(type)
-            ]
-            for type in ["physical", "cognitive", "social"]
-        }
-    
+    abilities: list[CharacterAbilitySchema] = Field(..., alias="abilities")
+    skills: list[CharacterSkillSchema] = Field(..., alias="skills")
+
     
 class CharacterCreateSchema(Schema):
     first_name: str
@@ -54,7 +40,6 @@ class CharacterCreateSchema(Schema):
     age: int | None = None
     alignment: str
     role: str | None = None
-    
     strength: int
     agility: int
     endurance: int

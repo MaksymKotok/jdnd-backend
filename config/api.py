@@ -1,4 +1,4 @@
-from ninja import NinjaAPI
+from ninja import NinjaAPI, Swagger
 
 api = NinjaAPI()
 
