@@ -121,5 +121,13 @@ class Character(models.Model):
     def user_full_name(self) -> str:
         return f"{self.user.first_name} {self.user.last_name}"
     
+    @property
+    def skills_by_groups(self):
+        return {
+            "physical": self.skills.filter(type=SkillType.PHYSICAL),
+            "cognitive": self.skills.filter(type=SkillType.COGNITIVE),
+            "social": self.skills.filter(type=SkillType.SOCIAL),
+        }
+    
     def __str__(self) -> str:
         return self.full_name
